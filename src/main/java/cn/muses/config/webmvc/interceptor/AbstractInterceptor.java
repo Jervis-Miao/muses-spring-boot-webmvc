@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import cn.muses.dto.BaseResponseDTO;
+import cn.muses.web.model.dto.BaseResponseDTO;
 import cn.muses.utils.JsonMapper;
 import cn.muses.utils.SpringContextUtils;
 

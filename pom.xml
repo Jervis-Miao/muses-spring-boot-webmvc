@@ -22,7 +22,10 @@
         <fst.version>2.57</fst.version>
         <spring-boot-orika-starter.version>1.9.0</spring-boot-orika-starter.version>
         <spring-boot-velocity-starter.version>1.0.4.RELEASE</spring-boot-velocity-starter.version>
+        <spring-boot-dubbo-starter.version>2.0.0</spring-boot-dubbo-starter.version>
         <jetcache.version>2.5.11</jetcache.version>
+        <jedis.version>2.9.0</jedis.version>
+        <netty.version>4.1.27.Final</netty.version>
     </properties>
 
     <dependencies>
@@ -40,6 +43,31 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!-- dubbo -->
+        <dependency>
+            <groupId>com.alibaba.spring.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>${spring-boot-dubbo-starter.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- dubbo registry -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
         </dependency>
 
         <!-- AOP -->
@@ -83,11 +111,6 @@
                     <artifactId>jedis</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
         </dependency>
 
         <!-- orika -->

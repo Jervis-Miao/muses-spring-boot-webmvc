@@ -2,7 +2,7 @@
  * Copyright 2019 All rights reserved.
  */
 
-package cn.muses.dto;
+package cn.muses.web.model.dto;
 
 import java.util.ArrayList;
 import java.util.Arrays;

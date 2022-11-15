@@ -12,7 +12,7 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
 import cn.muses.constants.CacheConstant;
-import cn.muses.dto.BaseResponseDTO;
+import cn.muses.web.model.dto.BaseResponseDTO;
 import cn.muses.utils.TokenUtils;
 
 /**

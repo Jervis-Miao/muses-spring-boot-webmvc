@@ -1,4 +1,4 @@
-package cn.muses.dto;
+package cn.muses.web.model.dto;
 
 /**
  * 统一参数

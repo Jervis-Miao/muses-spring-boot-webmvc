@@ -33,7 +33,7 @@ import cn.muses.config.webmvc.interceptor.ApiInterceptor;
 import cn.muses.config.webmvc.interceptor.GlobalTokenInterceptor;
 import cn.muses.config.webmvc.interceptor.IApiInterceptorProcessor;
 import cn.muses.constants.MvcConstant;
-import cn.muses.dto.BaseResponseDTO;
+import cn.muses.web.model.dto.BaseResponseDTO;
 import cn.muses.exceptions.MusesException;
 import cn.muses.utils.SpringContextUtils;
 
