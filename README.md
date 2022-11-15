@@ -1,4 +1,4 @@
-# muses-spring-boot-archetype
+# muses-spring-boot-webmvc
 
 1. 创建脚手架并打包打开终端，到这个项目的根目录，然后创建 <code>archetype</code>
 
