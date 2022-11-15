@@ -3,7 +3,7 @@
 1. 创建脚手架并打包打开终端，到这个项目的根目录，然后创建 <code>archetype</code>
 
    ```shell
-   cd ${workspace}/muses-spring-boot-archetype
+   cd ${workspace}/muses-spring-boot-webmvc
    mvn archetype:create-from-project -s ${maven_home}/setting.xml
    ```
 
@@ -11,7 +11,7 @@
 2. 接着到生成的target目录，将项目打包到本地仓库。
 
    ```shell
-   cd ${workspace}/muses-spring-boot-archetype/target/generated-sources/archetype
+   cd ${workspace}/muses-spring-boot-webmvc/target/generated-sources/archetype
    mvn install -s ${maven_home}/setting.xml
    ```
 
