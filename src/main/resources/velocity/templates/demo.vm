@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+  <header>
+    <name>b</name>
+  </header>
+  <body>
+    ##引入外部xml，并定义变量
+##    #set($str = "#parse($!child)")
+##    $!str
+  <en>
+    ##引用外部加密算法
+##    $!en.encodeToString($str.getBytes())
+  </en>
+  </body>
+  <test>
+    ##类
+##    $!class.getName()
+    ##对象转换
+##    $!jo.toJSONString($!obj)
+##    $!jo.parseObject($!objStr,$!class)
+    ##数组
+##    #set($array = ["pine", "oak", "maple"])
+##    $!array.get(1)
+##    #if($list.get(0)=="l1" || $list.get(0)=="l2")
+##    #set($test = "Y")
+##    #else
+##    #set($test = "N")
+##    #end
+##    $!test
+##    #set($int = $Integer.parseInt($list.get(0)) - 1)
+##    $!int
+##    $!aObj
+  </test>
+</package>

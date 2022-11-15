@@ -16,9 +16,9 @@ import cn.muses.config.annotation.EnableDubboProvider;
  * @date 2022/11/14.
  */
 @SpringBootApplication
-@EnableScheduling
-@EnableAspectJAutoProxy(exposeProxy = true)
-@EnableDubboProvider
+// @EnableScheduling
+// @EnableAspectJAutoProxy(exposeProxy = true)
+// @EnableDubboProvider
 public class MusesApplication {
 
     /**

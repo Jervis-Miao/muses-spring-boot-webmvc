@@ -22,8 +22,8 @@ public class MusesMapperFactoryConfigurer extends AbstractOrikaMapperFactoryConf
     @Override
     protected void addFluidMapper(MapperFactory mapperFactory) {
         mapperFactory.classMap(BaseRequestDTO.class, BaseResponseDTO.class)
-            .field("optionDTOs", "options")
-            .fieldMap("extend", "extend").converter("mapConverter").add()
+            .field("uid", "ret")
+            .fieldMap("uidEn", "msg").converter("mapConverter").add()
             .byDefault().register();
     }
 }

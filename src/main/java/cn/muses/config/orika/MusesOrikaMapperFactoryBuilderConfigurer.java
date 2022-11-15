@@ -16,11 +16,13 @@ public class MusesOrikaMapperFactoryBuilderConfigurer implements OrikaMapperFact
 
     @Override
     public void configure(DefaultMapperFactory.MapperFactoryBuilder<?, ?> orikaMapperFactoryBuilder) {
+
         /** 类构造器的解析器策略. 默认为 SimpleConstructorResolverStrategy **/
         orikaMapperFactoryBuilder.constructorResolverStrategy(UtilityResolver.getDefaultConstructorResolverStrategy());
 
         /** 编译生成的源码策略. 默认使用JavassistCompilerStrategy. **/
         orikaMapperFactoryBuilder.compilerStrategy(UtilityResolver.getDefaultCompilerStrategy());
+
         /** 如果要调试动态生成的源码, 使用此编译策略 **/
         // orikaMapperFactoryBuilder.compilerStrategy(new EclipseJdtCompilerStrategy());
 

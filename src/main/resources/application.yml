@@ -1,3 +1,234 @@
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml
+
+# tomcat 配置
+server:
+  port: 8080
+  forward-headers-strategy: native
+  servlet:
+    contextPath: /
+    applicationDisplayName: muses
+    jsp:
+      # 是否启用JspServlet. 另外, pom.xml需引入tomcat-embed-jasper
+      registered: false
+  tomcat:
+    # tomcat基目录。如果未指定，则使用临时目录（linux服务器会将10天未使用的临时目录清除，届时文件导入功能将会异常）
+    basedir: /home/muses/tomcat/
+    # 请求体大小限制，-1为不限
+    max-http-post-size: -1
+    # connector请求连接超时时长
+    connectionTimeout: 30000
+    # connector最小活跃线程数
+    minSpareThreads: 25
+    # connector的最大活跃线程数
+    maxThreads: 300
+    # 当maxThreads达到时, 可以接受请求的队列大小
+    maxConnections: 10000
+    # 当最大请求连接maxConnections满时的最大排队大小
+    acceptCount: 500
+    accesslog:
+      # 是否启用accesslog
+      enabled: false
+      prefix: access_log
+      file-date-format: .yyyy-MM-dd
+      suffix: .log
+      buffered: true
+      directory: /home/muses/tomcat/access/
+      rename-on-rotate: false
+      request-attributes-enabled: false
+      rotate: true
+  undertow:
+    accesslog:
+      pattern: common
+
+# spring 配置
 spring:
   application:
     name: muses
+  resources:
+    # 是否添加webmvc中的第二个SimpleUrlHandlerMapping
+    add-mappings: false
+  servlet:
+    multipart:
+      # 最大上传文件大小（MB）
+      max-file-size: 5MB
+      # 最大请求大小（MB）
+      max-request-size: 20MB
+  mvc:
+    view:
+      # jsp文件路径前缀
+      prefix:
+      # jsp文件后缀
+      suffix: .jsp
+    # 但没有对应的HandlerMapping时是否抛出异常, 而不是返回404
+    throw-exception-if-no-handler-found: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    # 设置空如何序列化（非空）
+    defaultPropertyInclusion: non_null
+    serialization:
+      # 时间戳
+      write-dates-as-timestamps: true
+      # 格式化输出
+      indent_output: true
+    deserialization:
+      # 允许对象忽略json中不存在的属性
+      fail_on_unknown_properties: false
+    parser:
+      # 允许出现特殊字符和转义符
+      allow_unquoted_control_chars: true
+      # 允许出现单引号
+      allow_single_quotes: true
+  velocity:
+    # 激活velocity
+    enabled: true
+    # 只有在velocity作为mvc视图模板时有用
+    prefix: WEB-INF/velocity/templates
+    # 只有在velocity作为mvc视图模板时有用
+    suffix: .vm
+    # 模板路径(file:/home/temporary/templates/velocity/)
+    resourceLoaderPath: classpath:/velocity/templates
+    # toolbox 配置文件路径
+    toolboxConfigLocation: classpath:/velocity/toolbox.xml
+    # 是否加载velocity tool 配置对象到spring容器中
+    tools-expose-beans: false
+    # 是否首选文件系统访问来加载模板
+    prefer-file-system-access: true
+    # 是否装配velocity layout用于视图解析
+    layout-enabled: false
+    properties: { input.encoding: UTF-8, output.encoding: UTF-8, runtime.references.strict: true, runtime.strict.math: true, directive.set.null.allow: true, directive.parse.max.depth: 10, velocimacro.permissions.allow.inline: true, velocimacro.permissions.allow.inline.to.replace.global: false, file.resource.loader.class: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader, resource.loader: class }
+
+# Actuator 配置
+management:
+  endpoints:
+    # 是否默认激活endpoint功能
+    enabled-by-default: true
+    web:
+      # actuator根路径
+      base-path: /actuator
+      # 暴露的enpoint. 默认为health和info
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      # 是否显示health enpoint详细信息
+      show-details: never
+
+# orika 配置
+orika:
+  enabled: true
+  useBuiltinConverters: true
+  useAutoMapping: true
+  mapNulls: false
+  dumpStateOnException: false
+  favorExtension: false
+  captureFieldContext: false
+
+# redis 哨兵集群配置
+redis:
+  redisson:
+    threads: 16
+    nettyThreads: 32
+  sentinel:
+    lowRel:
+      masterName: low_reliability_d1
+    # sentinel 服务器
+    ser1:
+      host: 192.168.56.89
+      port: 26379
+    ser2:
+      host: 192.168.56.90
+      port: 26379
+    ser3:
+      host: 192.168.56.124
+      port: 26379
+    default:
+      password: ins1234
+      database: 15
+      # xml配置为枚举,无法使用此处配置!!!读操作节点类型;有SLAVE/MASTER/MASTER_SLAVE,默认SLAVE
+      readMode: MASTER
+      # xml配置为枚举,无法使用此处配置!!!订阅操作节点类型:SLAVE/MASTER,默认SLAVE
+      subscriptionMode: MASTER
+      # 订阅每节点最小空闲连接数,默认1
+      subscriptionConnectionMinimumIdleSize: 1
+      # 每个redis节点pub/sub最大连接池数量,默认50
+      subscriptionConnectionPoolSize: 50
+      # 每个 redis 连接订阅数量的限制.默认5
+      subscriptionsPerConnection: 5
+      # 每个slave 节点最小空闲连接数,默认32
+      slaveConnectionMinimumIdleSize: 0
+      # 每个 slave 节点,最大连接池数量,默认64
+      slaveConnectionPoolSize: 0
+      # master 节点最小空闲连接数,默认32
+      masterConnectionMinimumIdleSize: 10
+      # master 节点最大连接池数量,默认64
+      masterConnectionPoolSize: 64
+      # redisServer 响应(执行)的超时时间.从命令完全发送开始算起,默认3000。我们有些大对象，而且定时任务容易集中执行。
+      timeout: 5000
+      # 连接到 Redis server 的超时时间 默认10000
+      connectTimeout: 10000
+      # 连接池中,大于最小空闲连接数的连接多长时间回回收,单位毫秒.默认 10000
+      idleConnectionTimeout: 10000
+      # 尝试发送命令到服务器的次数,超过未发送成功则报错.成功则用 timeout 计时.默认3次
+      retryAttempts: 3
+      # 间隔多长时间后,另一条命令会尝试被执行,单位毫秒.默认1500,(应该是上次retry失败后)
+      retryInterval: 1500
+      # 从第一次执行失败开始,连续多长时间内无法成功执行命令的节点被认为失败.单位毫秒.默认60000,
+      failedSlaveCheckInterval: 60000
+      # 间隔多长时间再尝试连接断开的服务器.单位毫秒.默认3000
+      failedSlaveReconnectionInterval: 3000
+      pingConnectionInterval: 60000
+      keepAlive: true
+      tcpNoDelay: true
+      # 多Redis服务器连接负载均衡模式,有WeightedRound/RoundRobin/Random,默认RoundRobin
+      loadBalancer: org.redisson.connection.balancer.RoundRobinLoadBalancer
+
+# jetcache配置
+jetcache:
+  # 缓存更新是否线程同步保护
+  penetrationProtect: false
+  # 是否允许方法缓存. 注意, 此配置项不可替换@EnableMethodCache注解
+  enableMethodCache: true
+  # 统计间隔，0表示不统计
+  statIntervalMinutes: 15
+  # 缓存名称中是否包含area名字
+  areaInCacheName: false
+  # 非指定cache name(自动name生成时),隐藏的包名称
+  hidePackages:
+  local:
+    default:
+      # 本地缓存类型
+      type: caffeine
+      # 本地单个缓存(针对每个cache name)限制个数
+      limit: 100
+      # 本地缓存key转换器
+      keyConvertor: fastjson
+      # 缓存多长时间没访问就失效.只针对本地缓存, 0表示不使用此功能
+      expireAfterAccessInMillis: 0
+  remote:
+    default:
+      # 远程缓存类型
+      type: redis
+      # key前缀
+      keyPrefix: "MUS:CA:"
+      # 远程缓存key转换器
+      keyConvertor: fastjson
+      # 远程缓存value编码器
+      valueEncoder: kryo
+      # 远程环境value解码器
+      valueDecoder: kryo
+      # redis缓存资源池
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      # redis缓存使用的数据库
+      database: 0
+      # redis缓存响应timeout时间, 单位ms
+      timeout: 2000
+      # redis sentinel master名称
+      masterName: low_reliability
+      # redis sentinel 集群配置
+      sentinels: 192.168.56.89:26379,192.168.56.90:26379,192.168.56.124:26379

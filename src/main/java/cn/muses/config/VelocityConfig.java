@@ -26,18 +26,6 @@ import cn.muses.utils.VelocityUtils;
 @Configuration
 public class VelocityConfig {
 
-    @Bean
-    @ConditionalOnMissingBean(VelocityEngine.class)
-    public VelocityEngine velocityEngine() {
-        return new VelocityEngine();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(VelocityProperties.class)
-    public VelocityProperties velocityProperties() {
-        return new VelocityProperties();
-    }
-
     @ConditionalOnClass(VelocityEngine.class)
     @ConditionalOnProperty({VelocityConstants.VELOCITY_ENABLED_PROPERTY_NAME,
         VelocityConstants.VELOCITY_TOOLBOX_CONFIG_LOCATION_PROPERTY_NAME})

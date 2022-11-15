@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://www.chaos.com/logback.xsd" scan="true" scanPeriod="30 seconds">
+
+    <contextName>muses</contextName>
+
+    <define name="log.path" class="cn.muses.config.logback.LogPathPropertyDefiner"/>
+    <define name="log.isRolling" class="cn.muses.config.logback.LogRollingPropertyDefiner"/>
+
+    <appender name="ALIBABA-APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${log.path}/muses.alibaba.log</file>
+        <append>true</append>
+        <!-- set immediateFlush to false for much higher logging throughput -->
+        <immediateFlush>true</immediateFlush>
+        <!-- 日志格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ["orpheus"] ["%thread"] [%p] %c#%M - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SPRING-APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${log.path}/muses.spring.log</file>
+        <append>true</append>
+        <!-- set immediateFlush to false for much higher logging throughput -->
+        <immediateFlush>true</immediateFlush>
+        <!-- 日志格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ["orpheus"] ["%thread"] [%p] %c#%M - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--控制台输出-->
+    <appender name="CONSOLE-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ["%thread"] [%p] %c#%M - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--应用日志-->
+    <appender name="APP-APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${log.path}/muses.app.log</file>
+        <append>true</append>
+        <!-- set immediateFlush to false for much higher logging throughput -->
+        <immediateFlush>true</immediateFlush>
+        <!-- 日志格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ["orpheus"] ["%thread"] [%p] %c#%M - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--STDOUT日志-->
+    <appender name="STDOUT-APPENDER" class="ch.qos.logback.core.FileAppender">
+        <file>${log.path}/muses.stdout.log</file>
+        <append>true</append>
+        <!-- set immediateFlush to false for much higher logging throughput -->
+        <immediateFlush>true</immediateFlush>
+        <!-- 日志格式 -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ["orpheus"] ["%thread"] [%p] %c#%M - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 基logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE-APPENDER"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </root>
+
+    <!-- 指定logger -->
+    <logger name="com.alibaba.dubbo" level="WARN" additivity="FALSE">
+        <appender-ref ref="ALIBABA-APPENDER"/>
+    </logger>
+    <logger name="org.springframework" level="INFO" additivity="TRUE">
+        <appender-ref ref="SPRING-APPENDER"/>
+    </logger>
+    <logger name="cn.muses" level="INFO" additivity="FALSE">
+        <appender-ref ref="CONSOLE-APPENDER"/>
+        <appender-ref ref="APP-APPENDER"/>
+    </logger>
+
+</configuration>

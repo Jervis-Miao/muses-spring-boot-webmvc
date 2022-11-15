@@ -1,5 +1,7 @@
 package cn.muses.web.model.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * 统一参数
  *
@@ -112,16 +114,17 @@ public class BaseRequestDTO extends BaseDTO {
         this.weixinGovern = weixinGovern;
     }
 
-
     @Override
     public String toString() {
-        return "BaseRequestDTO{" +
-                "ip='" + ip + '\'' +
-                ", uid=" + uid +
-                ", uidEn='" + uidEn + '\'' +
-                ", sid='" + sid + '\'' +
-                ", prodLinePlatform='" + prodLinePlatform + '\'' +
-                ", weixinGovern='" + weixinGovern + '\'' +
-                '}';
+        return new ToStringBuilder(this)
+            .append("ip", ip)
+            .append("uid", uid)
+            .append("uidEn", uidEn)
+            .append("sid", sid)
+            .append("prodLinePlatform", prodLinePlatform)
+            .append("weixinGovern", weixinGovern)
+            .append("adminToken", adminToken)
+            .append("noLoginToken", noLoginToken)
+            .toString();
     }
 }
