@@ -35,8 +35,7 @@ cn.muses.MusesApplication
 
 ```properties
 -Denv=DEV
--Dxyzconf_file=apollo_conf.properties
--Ddubbo.resolve.file=D:\workspace\orpheus-parent\orpheus\src\test\resources\dubbo-resolve.properties
+-Ddubbo.resolve.file=D:\workspace\muses-spring-boot-webmvc\src\test\resources\dubbo-resolve.properties
 ```
 
 ## 单元测试-请参考
