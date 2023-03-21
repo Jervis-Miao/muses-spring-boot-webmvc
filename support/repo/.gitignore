@@ -5,7 +5,7 @@ target/
 .idea
 *.iws
 *.iml
-*.git
+*.ipr
 
 # project
 node_modules
