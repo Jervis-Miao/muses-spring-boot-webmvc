@@ -20,6 +20,9 @@
 ## Java代码格式化器
 `/support/format/eclipse-codestyle-p3c-1.1.xml`
 
+## gitignore
+`gitignore.properties改名为".gitignore"`
+
 ## 相关sql路径
 `/support/db`
 
