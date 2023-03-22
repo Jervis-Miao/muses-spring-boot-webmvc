@@ -31,7 +31,7 @@
 
 ## 启动类
 ```java
-cn.muses.MusesApplication
+cn.muses.MusesChatApplication
 ```
 
 ## 启动参数

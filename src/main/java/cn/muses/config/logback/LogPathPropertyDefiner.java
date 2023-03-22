@@ -14,6 +14,6 @@ public class LogPathPropertyDefiner extends PropertyDefinerBase {
 
     @Override
     public String getPropertyValue() {
-        return System.getProperty("logging.path", "/home/muses/log/webmvc");
+        return System.getProperty("logging.path", "/Volumes/workspace/muses/log/webmvc");
     }
 }
