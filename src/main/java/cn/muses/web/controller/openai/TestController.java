@@ -2,7 +2,7 @@
  * Copyright 2022 All rights reserved.
  */
 
-package cn.muses.web.controller.chat;
+package cn.muses.web.controller.openai;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
