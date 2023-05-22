@@ -1,8 +1,8 @@
-/**
- * Copyright 2022 All rights reserved.
+/*
+ * Copyright (c) 2023. Muses Co., Ltd. All rights reserved.
  */
 
-package cn.muses.web.controller.openai;
+package cn.muses.web.controller.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
