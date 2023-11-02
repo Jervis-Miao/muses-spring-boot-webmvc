@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @date 2020/12/1.
  */
 public class TestDemo extends JunitTest {
-	@Value("${spring.dubbo.application.name}")
+	@Value("${spring.application.name}")
 	private String applicationName;
 
 	@Test
