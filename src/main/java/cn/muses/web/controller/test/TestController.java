@@ -1,5 +1,5 @@
-/**
- * Copyright 2022 All rights reserved.
+/*
+ * Copyright (c) 2023. Muses Co., Ltd. All rights reserved.
  */
 
 package cn.muses.web.controller.test;

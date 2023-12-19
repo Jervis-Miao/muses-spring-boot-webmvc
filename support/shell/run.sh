@@ -7,7 +7,7 @@
 API_NAME=musesApplication
 
 #JAR
-JAR_HOME=/home/INS/source/musesApplication/target
+JAR_HOME=/home/muses/source/musesApplication/target
 JAR_NAME=$API_NAME\.jar
 
 

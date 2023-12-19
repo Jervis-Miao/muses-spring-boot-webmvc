@@ -20,6 +20,9 @@
 ## Java代码格式化器
 `/support/format/eclipse-codestyle-p3c-1.1.xml`
 
+## gitignore
+`/support/git/.gitignore"`
+
 ## 相关sql路径
 `/support/db`
 
@@ -28,7 +31,7 @@
 
 ## 启动类
 ```java
-cn.muses.MusesApplication
+cn.muses.MusesChatApplication
 ```
 
 ## 启动参数
