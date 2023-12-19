@@ -81,6 +81,7 @@ spring:
         time-between-eviction-runs-millis: 60000
         min-evictable-idle-time-millis: 300000
         defaultAutoCommit: false
+        query-timeout: 60
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
