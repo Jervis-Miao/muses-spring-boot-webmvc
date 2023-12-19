@@ -63,6 +63,24 @@ spring:
       suffix: .jsp
     # 但没有对应的HandlerMapping时是否抛出异常, 而不是返回404
     throw-exception-if-no-handler-found: true
+  # Druid数据库配置
+  datasource:
+      druid:
+        url: jdbc:mysql://192.168.56.75:3306/underw?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+        username: root
+        password: ins1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        initial-size: 1
+        max-active: 32
+        min-idle: 1
+        max-wait: 30000
+        validation-query: select 1
+        test-on-borrow: false
+        test-on-return: false
+        test-while-idle: true
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        defaultAutoCommit: false
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
@@ -232,3 +250,10 @@ jetcache:
       masterName: low_reliability
       # redis sentinel 集群配置
       sentinels: 192.168.56.89:26379,192.168.56.90:26379,192.168.56.124:26379
+
+# mybatis配置
+mybatis:
+  mapper-locations:
+    - classpath:mybatis/xml/mapper/*.xml
+    - classpath:mybatis/xml/dao/*.xml
+  typeAliasesPackage: cn.xyz.underw.configuration.repository.g.entity

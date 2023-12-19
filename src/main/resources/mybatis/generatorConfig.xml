@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- mybatis-generator用到的路径参数，根据本地路径设置 -->
+    <properties resource="mybatis/mybatis-generator.properties"/>
+    <!-- 驱动路径 -->
+    <classPathEntry location="${mysql.driver}"/>
+    <context id="new-underw-single"  targetRuntime="MyBatis3DynamicSql">
+        <!-- 自定义使用方式支持，包括DAO，扩展XML，注解等 -->
+        <plugin
+            type="cn.xyz.chaos.orm.generator.plugins.CustomizeDaoSupportPlugin">
+            <property name="mapperAnnotation" value="cn.xyz.chaos.orm.mybatis.MyBatisRepository"/>
+            <property name="daoSuffix" value="DAO"/>
+            <property name="targetProject" value="${java.path}"/>
+            <property name="targetPackage" value="${java.package.base}.repository.dao"/>
+            <property name="xmlTargetProject" value="${resources.path}"/>
+            <property name="xmlTargetPackage" value="mybatis/xml/dao"/>
+        </plugin>
+
+        <!-- 自动生成sql添加rowBounds支持 -->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driverClassName}" connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}" password="${spring.datasource.password}"/>
+        <!-- 数据库类型解析为JavaType -->
+        <javaTypeResolver type="cn.xyz.chaos.orm.generator.internal.types.NoShortJavaTypeResolver">
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- entity 生成配置 -->
+        <javaModelGenerator targetPackage="${java.package.base}.repository.g.entity" targetProject="${java.path}"/>
+
+        <!-- sqlMapper xml文件生成配置 -->
+        <sqlMapGenerator targetPackage="mybatis/xml/mapper" targetProject="${resources.path}"/>
+
+        <!-- sqlMapper 接口生成配置 -->
+        <javaClientGenerator targetPackage="${java.package.base}.repository.g.mapper" targetProject="${java.path}" type="XMLMAPPER"/>
+
+        <!-- Table 映射配置 START -->
+        <table tableName="table" catalog="muses">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+
+    </context>
+
+</generatorConfiguration>
