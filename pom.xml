@@ -41,6 +41,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Muses开发框架 -->
+        <dependency>
+            <groupId>xyz.muses.framework</groupId>
+            <artifactId>muses-orm</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- 健康监控依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -127,12 +134,6 @@
             <artifactId>mybatis-generator-core</artifactId>
             <version>${mybatis-generator.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.xyz</groupId>
-            <artifactId>chaos-orm</artifactId>
-            <version>${chaos.version}</version>
         </dependency>
 
         <!-- redisson -->
