@@ -13,7 +13,7 @@ import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cn.xyz.chaos.orm.mybatis.easylist.paginator.OffsetLimitInterceptor;
+import xyz.muses.framework.orm.mybatis.easylist.paginator.OffsetLimitInterceptor;
 
 /**
  * @author miaoqiang
