@@ -1,6 +1,6 @@
 package cn.muses.functional;
 
-import cn.xyz.chaos.orm.generator.GeneratorLauncher;
+import xyz.muses.framework.orm.generator.GeneratorLauncher;
 
 /**
  * @author chaochenghan
