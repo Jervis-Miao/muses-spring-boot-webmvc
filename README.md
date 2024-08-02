@@ -31,7 +31,7 @@
 
 ## 启动类
 ```java
-cn.muses.MusesChatApplication
+xyz.muses.MusesChatApplication
 ```
 
 ## 启动参数
@@ -43,5 +43,5 @@ cn.muses.MusesChatApplication
 
 ## 单元测试-请参考
 ```java
-cn.muses.TestDemo
+xyz.muses.TestDemo
 ```

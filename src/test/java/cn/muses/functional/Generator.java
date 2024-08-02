@@ -1,4 +1,4 @@
-package cn.muses.functional;
+package xyz.muses.functional;
 
 import xyz.muses.framework.orm.generator.GeneratorLauncher;
 
