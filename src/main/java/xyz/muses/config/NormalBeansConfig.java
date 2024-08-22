@@ -4,6 +4,7 @@
 
 package xyz.muses.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import xyz.muses.framework.common.utils.JsonMapper;
 import xyz.muses.framework.common.utils.SpringContextUtils;
+import xyz.muses.utils.JwtUserUtils;
 
 /**
  * @author jervis
@@ -20,6 +22,11 @@ import xyz.muses.framework.common.utils.SpringContextUtils;
  */
 @Configuration
 public class NormalBeansConfig {
+
+    @Value("${jwt.algorithm.secret}")
+    private String secret;
+    @Value("${jwt.expires.ttl}")
+    private long ttl;
 
     @Bean("springContextUtils")
     public SpringContextUtils initSpringContextUtils() {
@@ -36,5 +43,10 @@ public class NormalBeansConfig {
     @Primary
     public JsonMapper initJsonMapper(ObjectMapper objectMapper) {
         return new JsonMapper(objectMapper);
+    }
+
+    @Bean
+    public JwtUserUtils initJwtUtils(JsonMapper jsonMapper) {
+        return new JwtUserUtils(this.secret, this.ttl, jsonMapper);
     }
 }

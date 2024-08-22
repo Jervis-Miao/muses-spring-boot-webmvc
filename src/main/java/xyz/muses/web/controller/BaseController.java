@@ -69,4 +69,12 @@ public class BaseController {
         dto.getMsg().add(error);
         return dto;
     }
+
+    protected BaseResponseDTO returnWithCheckFail(BaseResponseDTO.DEFAULT_RESPONSE_RESULT responseResult,
+        String error) {
+        BaseResponseDTO dto = new BaseResponseDTO();
+        dto.setRet(responseResult.value());
+        dto.getMsg().add(error);
+        return dto;
+    }
 }

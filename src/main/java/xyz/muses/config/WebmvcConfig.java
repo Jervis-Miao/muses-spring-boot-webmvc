@@ -30,11 +30,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import xyz.muses.config.webmvc.filter.RequestWrapperFilter;
 import xyz.muses.config.webmvc.interceptor.ApiInterceptor;
-import xyz.muses.config.webmvc.interceptor.GlobalTokenInterceptor;
 import xyz.muses.config.webmvc.interceptor.IApiInterceptorProcessor;
+import xyz.muses.config.webmvc.interceptor.JwtInterceptor;
 import xyz.muses.constants.MvcConstant;
 import xyz.muses.exceptions.MusesException;
 import xyz.muses.framework.common.utils.SpringContextUtils;
+import xyz.muses.utils.JwtUserUtils;
 import xyz.muses.web.model.dto.BaseResponseDTO;
 
 /**
@@ -49,7 +50,7 @@ public class WebmvcConfig {
     public FilterRegistrationBean requestWrapperFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new RequestWrapperFilter());
-        registration.addUrlPatterns(MvcConstant.API_URL_PREFIX + "/*");
+        registration.addUrlPatterns(MvcConstant.EXTERNAL_API_URL_PREFIX + "/*");
         registration.setName("requestWrapperFilter");
         registration.setOrder(1);
         return registration;
@@ -59,22 +60,23 @@ public class WebmvcConfig {
      * Mvc配置
      * 
      * @param redisson
+     * @param jwtUserUtils
      * @param objectMapper
      * @param processors
      * @return
      */
     @Bean
-    public WebMvcConfigurer webMvcConfigurer(RedissonClient redisson, ObjectMapper objectMapper,
+    public WebMvcConfigurer webMvcConfigurer(RedissonClient redisson, JwtUserUtils jwtUserUtils,
+        ObjectMapper objectMapper,
         List<IApiInterceptorProcessor> processors) {
         WebMvcConfigurer webMvcConfigurer = new WebMvcConfigurer() {
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(new ApiInterceptor(processors))
-                    .addPathPatterns(MvcConstant.API_URL_PREFIX + "/**");
-                // 全局用户上下文拦截器
-                registry.addInterceptor(new GlobalTokenInterceptor(redisson))
-                    .addPathPatterns(MvcConstant.MATERIAL_SALES_PATH_PREFIX + "/**")
-                    .addPathPatterns(MvcConstant.SALE_ESTIMATE_PATH_PREFIX + "/**");
+                    .addPathPatterns(MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
+                // JWT用户上下文拦截器
+                registry.addInterceptor(new JwtInterceptor(redisson, jwtUserUtils))
+                    .excludePathPatterns(MvcConstant.LOGIN_IN_URL, MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
             }
 
             @Override

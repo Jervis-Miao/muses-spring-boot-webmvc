@@ -8,18 +8,18 @@ package xyz.muses.config.webmvc.interceptor;
  * @author jervis
  * @date 2022/6/22.
  */
-public class GlobalUserContext {
+public class JwtUserContext {
 
-    private static final ThreadLocal<GlobalUser> context = ThreadLocal.withInitial(() -> null);
+    private static final ThreadLocal<JwtLocalUser> context = ThreadLocal.withInitial(() -> null);
 
-    private GlobalUserContext() {}
+    private JwtUserContext() {}
 
-    public static GlobalUser get() {
+    public static JwtLocalUser get() {
         return context.get();
     }
 
-    public static void set(GlobalUser weComUser) {
-        context.set(weComUser);
+    public static void set(JwtLocalUser jwtLocalUser) {
+        context.set(jwtLocalUser);
     }
 
     public static void release() {

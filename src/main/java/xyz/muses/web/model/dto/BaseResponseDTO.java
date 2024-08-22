@@ -156,18 +156,7 @@ public class BaseResponseDTO<T> {
         /** 不支持的媒体类型 */
         MEDIA_TYPE_ERROR(-10, "不支持的媒体类型"),
         /** 业务逻辑错误 */
-        BIZ_ERROR(-11, ""),
-        /** 二要素校验失败 **/
-        TWOELEMENT_ERROR(-12, "二要素校验错误"),
-        /** 跳转异常页 **/
-        ERROR_PAGE(-13, "跳转异常页"),
-        /** App版本过低 **/
-        APP_NEED_UPDATE(-14, "请先升级App到最新版本"),
-
-        ACCOUNT_PAUSE(10, "账号已冻结"),
-
-        /** 需要银行签约 **/
-        BANK_SIGN_ERROR(-15, "需要银行签约");
+        BIZ_ERROR(-11, "");
 
         private final Integer value;
 
