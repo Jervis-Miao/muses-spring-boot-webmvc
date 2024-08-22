@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
-import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.tools.ToolContext;

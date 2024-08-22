@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Primary;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import xyz.muses.utils.JsonMapper;
-import xyz.muses.utils.SpringContextUtils;
+import xyz.muses.framework.common.utils.JsonMapper;
+import xyz.muses.framework.common.utils.SpringContextUtils;
 
 /**
  * @author jervis

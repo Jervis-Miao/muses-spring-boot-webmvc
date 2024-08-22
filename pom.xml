@@ -18,7 +18,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <muses.version>1.0.3</muses.version>
+        <muses.version>1.0.4</muses.version>
         <spring-boot-druid-starter.version>1.1.10</spring-boot-druid-starter.version>
         <druid.version>1.1.14</druid.version>
         <mybatis-starter.version>2.0.0</mybatis-starter.version>
@@ -45,8 +45,19 @@
         <!-- Muses开发框架 -->
         <dependency>
             <groupId>xyz.muses.framework</groupId>
+            <artifactId>muses-common</artifactId>
+            <version>${muses.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xyz.muses.framework</groupId>
             <artifactId>muses-orm</artifactId>
             <version>${muses.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xyz.muses.framework</groupId>
+                    <artifactId>muses-common</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 健康监控依赖 -->
@@ -104,13 +115,6 @@
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${spring-boot-druid-starter.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -163,6 +167,14 @@
                     <groupId>redis.clients</groupId>
                     <artifactId>jedis</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.checkerframework</groupId>
+                    <artifactId>checker-qual</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.errorprone</groupId>
+                    <artifactId>error_prone_annotations</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -181,6 +193,17 @@
 
         <!-- Velocity -->
         <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>velocity-spring-boot-starter</artifactId>
             <version>${spring-boot-velocity-starter.version}</version>
@@ -188,6 +211,26 @@
                 <exclusion>
                     <groupId>commons-lang</groupId>
                     <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-digester</groupId>
+                    <artifactId>commons-digester</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

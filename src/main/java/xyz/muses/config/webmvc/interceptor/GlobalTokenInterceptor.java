@@ -12,8 +12,8 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 
 import xyz.muses.constants.CacheConstant;
+import xyz.muses.framework.common.utils.TokenUtils;
 import xyz.muses.web.model.dto.BaseResponseDTO;
-import xyz.muses.utils.TokenUtils;
 
 /**
  * @author jervis

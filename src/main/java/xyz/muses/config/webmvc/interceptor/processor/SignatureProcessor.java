@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import xyz.muses.config.webmvc.interceptor.IApiInterceptorProcessor;
-import xyz.muses.utils.JsonMapper;
-import xyz.muses.utils.SignatureUtils;
+import xyz.muses.framework.common.utils.JsonMapper;
+import xyz.muses.framework.common.utils.SignatureUtils;
 
 /**
  * @author jervis

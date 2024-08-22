@@ -33,9 +33,9 @@ import xyz.muses.config.webmvc.interceptor.ApiInterceptor;
 import xyz.muses.config.webmvc.interceptor.GlobalTokenInterceptor;
 import xyz.muses.config.webmvc.interceptor.IApiInterceptorProcessor;
 import xyz.muses.constants.MvcConstant;
-import xyz.muses.web.model.dto.BaseResponseDTO;
 import xyz.muses.exceptions.MusesException;
-import xyz.muses.utils.SpringContextUtils;
+import xyz.muses.framework.common.utils.SpringContextUtils;
+import xyz.muses.web.model.dto.BaseResponseDTO;
 
 /**
  * @author jervis
@@ -57,10 +57,9 @@ public class WebmvcConfig {
 
     /**
      * Mvc配置
-     *
-     * @param redissonUtils
+     * 
+     * @param redisson
      * @param objectMapper
-     * @param abuseInterceptor
      * @param processors
      * @return
      */

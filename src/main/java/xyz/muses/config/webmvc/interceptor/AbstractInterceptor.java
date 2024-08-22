@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import xyz.muses.framework.common.utils.JsonMapper;
+import xyz.muses.framework.common.utils.SpringContextUtils;
 import xyz.muses.web.model.dto.BaseResponseDTO;
-import xyz.muses.utils.JsonMapper;
-import xyz.muses.utils.SpringContextUtils;
 
 /**
  * @author jervis
