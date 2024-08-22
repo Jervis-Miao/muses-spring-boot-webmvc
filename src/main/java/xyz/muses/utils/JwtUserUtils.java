@@ -3,6 +3,8 @@
  */
 package xyz.muses.utils;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,7 +74,7 @@ public class JwtUserUtils {
 
     /**
      * 解析并认证Token
-     * 
+     *
      * @param token JWT
      * @param clazz 用户对象类型
      * @return 用户信息
@@ -92,5 +94,20 @@ public class JwtUserUtils {
             logger.error("verify JWT exception: {}", e.getMessage(), e);
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        // 创建一个安全的随机数生成器
+        SecureRandom secureRandom = new SecureRandom();
+
+        // 生成32字节的随机密钥
+        byte[] secretKey = new byte[32];
+        secureRandom.nextBytes(secretKey);
+
+        // 将密钥编码为Base64字符串
+        String secretKeyBase64 = Base64.getEncoder().encodeToString(secretKey);
+
+        // 输出生成的密钥
+        System.out.println("Generated HMAC-SHA256 secret key (base64 encoded): " + secretKeyBase64);
     }
 }

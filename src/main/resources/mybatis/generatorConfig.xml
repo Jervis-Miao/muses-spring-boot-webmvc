@@ -9,8 +9,8 @@
     <context id="new-underw-single"  targetRuntime="MyBatis3DynamicSql">
         <!-- 自定义使用方式支持，包括DAO，扩展XML，注解等 -->
         <plugin
-            type="cn.xyz.chaos.orm.generator.plugins.CustomizeDaoSupportPlugin">
-            <property name="mapperAnnotation" value="cn.xyz.chaos.orm.mybatis.MyBatisRepository"/>
+            type="xyz.muses.framework.orm.generator.plugins.CustomizeDaoSupportPlugin">
+            <property name="mapperAnnotation" value="xyz.muses.framework.orm.mybatis.MyBatisRepository"/>
             <property name="daoSuffix" value="DAO"/>
             <property name="targetProject" value="${java.path}"/>
             <property name="targetPackage" value="${java.package.base}.repository.dao"/>
@@ -25,7 +25,7 @@
         <jdbcConnection driverClass="${spring.datasource.driverClassName}" connectionURL="${spring.datasource.url}"
                         userId="${spring.datasource.username}" password="${spring.datasource.password}"/>
         <!-- 数据库类型解析为JavaType -->
-        <javaTypeResolver type="cn.xyz.chaos.orm.generator.internal.types.NoShortJavaTypeResolver">
+        <javaTypeResolver type="xyz.muses.framework.orm.generator.internal.types.NoShortJavaTypeResolver">
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 

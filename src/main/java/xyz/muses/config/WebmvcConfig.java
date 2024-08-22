@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -58,7 +59,7 @@ public class WebmvcConfig {
 
     /**
      * Mvc配置
-     * 
+     *
      * @param redisson
      * @param jwtUserUtils
      * @param objectMapper
@@ -109,6 +110,8 @@ public class WebmvcConfig {
                                 || StringUtils.isNotBlank(msg = ex.getMessage())) {
                                 return handleEx(response, BaseResponseDTO.DEFAULT_RESPONSE_RESULT.BIZ_ERROR, ex);
                             }
+                        } else if (ex instanceof NoHandlerFoundException) {
+                            return handleEx(response, BaseResponseDTO.DEFAULT_RESPONSE_RESULT.RESOURCE_NOT_EXIST, ex);
                         }
                         return handleEx(response, BaseResponseDTO.DEFAULT_RESPONSE_RESULT.SYSTEM_ERROR, ex);
                     }

@@ -264,4 +264,4 @@ mybatis:
   mapper-locations:
     - classpath:mybatis/xml/mapper/*.xml
     - classpath:mybatis/xml/dao/*.xml
-  typeAliasesPackage: cn.xyz.underw.configuration.repository.g.entity
+  typeAliasesPackage: xyz.muses.config.repository.g.entity

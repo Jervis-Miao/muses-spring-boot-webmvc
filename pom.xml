@@ -18,7 +18,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <muses.version>1.0.4</muses.version>
+        <muses.version>1.0.6</muses.version>
         <spring-boot-druid-starter.version>1.1.10</spring-boot-druid-starter.version>
         <druid.version>1.1.14</druid.version>
         <mybatis-starter.version>2.0.0</mybatis-starter.version>
@@ -40,6 +40,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- CGLIB -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.3.0</version>
         </dependency>
 
         <!-- Muses开发框架 -->
@@ -200,10 +207,6 @@
                 <exclusion>
                     <groupId>commons-lang</groupId>
                     <artifactId>commons-lang</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-collections</groupId>
-                    <artifactId>commons-collections</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

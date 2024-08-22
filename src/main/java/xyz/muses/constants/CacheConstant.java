@@ -18,7 +18,7 @@ public interface CacheConstant extends RedisConstant {
      * 缓存常量Key
      */
     enum Key {
-        JWT(KEY_PREFIX.concat("uer:jwt:"), 30, TimeUnit.DAYS);
+        JWT(KEY_PREFIX.concat("USER:JWT:"), 30, TimeUnit.DAYS);
 
         /**
          * Key的值

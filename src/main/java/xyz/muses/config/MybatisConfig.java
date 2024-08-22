@@ -9,7 +9,9 @@ import org.apache.ibatis.session.AutoMappingBehavior;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.type.JdbcType;
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +22,7 @@ import xyz.muses.framework.orm.mybatis.easylist.paginator.OffsetLimitInterceptor
  * @date 2023/12/19.
  */
 @Configuration
+// @MapperScan("xyz.muses.config.repository.g.mapper")
 public class MybatisConfig {
 
     @Bean
@@ -47,7 +50,7 @@ public class MybatisConfig {
     @Bean
     OffsetLimitInterceptor mybatisOffsetLimitInterceptor() {
         OffsetLimitInterceptor interceptor = new OffsetLimitInterceptor();
-        interceptor.setDialectClass("cn.xyz.chaos.orm.mybatis.easylist.paginator.dialect.MySQLDialect");
+        interceptor.setDialectClass("xyz.muses.framework.orm.mybatis.easylist.paginator.dialect.MySQLDialect");
         return interceptor;
     }
 }
