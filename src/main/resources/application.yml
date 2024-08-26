@@ -135,13 +135,6 @@ management:
       # 是否显示health enpoint详细信息
       show-details: never
 
-# jwt 配置
-jwt:
-  algorithm:
-    secret: "11111"
-  expires:
-    ttl: 604800000
-
 # orika 配置
 orika:
   enabled: true
@@ -265,3 +258,22 @@ mybatis:
     - classpath:mybatis/xml/mapper/*.xml
     - classpath:mybatis/xml/dao/*.xml
   typeAliasesPackage: xyz.muses.config.repository.g.entity
+
+# jwt 配置
+jwt:
+  algorithm:
+    secret: "11111"
+  expires:
+    ttl: 604800000
+
+# aliyun 配置
+aliyun:
+  idaas:
+    doraemon:
+      accessKeyId: "111";
+      accessKeySecret: "222";
+      regionId: "cn-hangzhou";
+      product: "yundun-common";
+      endpoint: "idaas-doraemon.aliyuncs.com";
+      applicationExternalId: "333";
+      applicationExternalSecret: "444";

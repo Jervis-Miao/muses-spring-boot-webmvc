@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Primary;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import xyz.muses.framework.common.utils.JsonMapper;
 import xyz.muses.framework.common.utils.SpringContextUtils;
 import xyz.muses.utils.JwtUserUtils;
@@ -27,6 +28,17 @@ public class NormalBeansConfig {
     private String secret;
     @Value("${jwt.expires.ttl}")
     private long ttl;
+
+    @Bean
+    public CommonsRequestLoggingFilter logFilter() {
+        CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+        filter.setIncludeQueryString(true);
+        filter.setIncludePayload(true);
+        filter.setMaxPayloadLength(10000);
+        filter.setIncludeHeaders(false);
+        filter.setAfterMessagePrefix("REQUEST DATA : ");
+        return filter;
+    }
 
     @Bean("springContextUtils")
     public SpringContextUtils initSpringContextUtils() {
