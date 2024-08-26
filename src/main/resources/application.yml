@@ -170,7 +170,7 @@ redis:
     password: ins1234
   single:
     host: 192.168.56.89
-    port: 6379
+    port: 6381
   sentinel:
     masterName: low_reliability_d1
     # sentinel 服务器
