@@ -30,7 +30,7 @@ import xyz.muses.config.redis.SingleProperties;
  */
 @Configuration
 @EnableConfigurationProperties({SentinelProperties.class, SingleProperties.class, RedissonProperties.class})
-public class RedissonSentinelConfig {
+public class RedissonConfig {
 
     @Bean("fstCodec")
     public FstCodec fstCodec() {
