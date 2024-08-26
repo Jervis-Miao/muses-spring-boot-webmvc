@@ -18,8 +18,8 @@ import xyz.muses.config.annotation.EnableDubboProvider;
  */
 @SpringBootApplication
 // @EnableScheduling
-// @EnableAspectJAutoProxy(exposeProxy = true)
 // @EnableDubboProvider
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class MusesApplication {
 
     /**

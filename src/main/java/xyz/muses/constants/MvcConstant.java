@@ -15,5 +15,6 @@ public interface MvcConstant {
 
     /** 登录接口前缀 **/
     String LOGIN_URL_PREFIX = "/user/login";
-    String LOGIN_IN_URL = LOGIN_URL_PREFIX.concat("/in");
+    String AUTH_URL_PREFIX = LOGIN_URL_PREFIX + "/auth";
+    String LOGIN_IN_URL = LOGIN_URL_PREFIX + "/in";
 }

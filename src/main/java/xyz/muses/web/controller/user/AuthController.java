@@ -18,7 +18,7 @@ import xyz.muses.web.service.user.AuthService;
  * @since : 2024-08-26
  */
 @RestController
-@RequestMapping(MvcConstant.LOGIN_URL_PREFIX)
+@RequestMapping(MvcConstant.AUTH_URL_PREFIX)
 public class AuthController extends BaseController {
 
     @Autowired

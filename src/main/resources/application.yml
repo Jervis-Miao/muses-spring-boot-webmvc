@@ -270,10 +270,10 @@ jwt:
 aliyun:
   idaas:
     doraemon:
-      accessKeyId: "111";
-      accessKeySecret: "222";
-      regionId: "cn-hangzhou";
-      product: "yundun-common";
-      endpoint: "idaas-doraemon.aliyuncs.com";
-      applicationExternalId: "333";
-      applicationExternalSecret: "444";
+      accessKeyId: "111"
+      accessKeySecret: "222"
+      regionId: "cn-hangzhou"
+      product: "yundun-common"
+      endpoint: "idaas-doraemon.aliyuncs.com"
+      applicationExternalId: "333"
+      applicationExternalSecret: "444"

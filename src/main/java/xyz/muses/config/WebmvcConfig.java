@@ -77,7 +77,8 @@ public class WebmvcConfig {
                     .addPathPatterns(MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
                 // JWT用户上下文拦截器
                 registry.addInterceptor(new JwtInterceptor(redisson, jwtUserUtils))
-                    .excludePathPatterns(MvcConstant.LOGIN_IN_URL, MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
+                    .excludePathPatterns(MvcConstant.AUTH_URL_PREFIX + "/**", MvcConstant.LOGIN_IN_URL,
+                        MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
             }
 
             @Override
