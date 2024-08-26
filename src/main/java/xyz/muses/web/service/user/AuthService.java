@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import xyz.muses.constants.ResultErrorConstant;
+import xyz.muses.exceptions.MusesException;
 import xyz.muses.external.aliyun.idaas.DoraemonManager;
 import xyz.muses.framework.common.utils.JsonMapper;
 import xyz.muses.web.model.dto.BaseResponseDTO;
@@ -45,13 +47,13 @@ public class AuthService extends BaseService {
         ImmutableMap<String, Object> params = ImmutableMap.of(
             "id", id, "businessId", "QUICK_LOGIN", "phoneNumber", phoneNumber);
         ServiceInvokeResponse smsResponse = doraemonManager.invoke("SendSmsCode", params);
-        if (smsResponse.getCode().endsWith("Overflow.Captcha")) {
+        if (smsResponse.getCode().endsWith("ServiceInArrears")) {
+            throw new MusesException(ResultErrorConstant.Error.CUSTOM, "阿里云服务欠费");
+        } else if (smsResponse.getCode().endsWith("Overflow.Captcha")) {
             return ImmutableMap.of("captcha", true);
-        }
-        if (smsResponse.getCode().endsWith("Overflow.Pause")) {
+        } else if (smsResponse.getCode().endsWith("Overflow.Pause")) {
             return ImmutableMap.of("pause", true);
-        }
-        if (smsResponse.getCode().equals("Params.Illegal")) {
+        } else if (smsResponse.getCode().equals("Params.Illegal")) {
             return ImmutableMap.of("restart", true);
         }
         return jsonMapper.getMapper().readValue(smsResponse.getData(), CaptchaQuestionDTO.class);
@@ -89,7 +91,7 @@ public class AuthService extends BaseService {
 
     /**
      * 验证图形验证码
-     * 
+     *
      * @param id
      * @param captchaCode
      * @return
