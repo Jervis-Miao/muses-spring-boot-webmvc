@@ -1,4 +1,4 @@
-package xyz.muses.config.aliyun;
+package xyz.muses.config;
 
 import java.util.Objects;
 
@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
+import xyz.muses.config.aliyun.IdaasDoraemonProperties;
 
 /**
  * 阿里云ACS配置
@@ -18,12 +19,12 @@ import com.aliyuncs.profile.DefaultProfile;
  */
 @Configuration
 @EnableConfigurationProperties(IdaasDoraemonProperties.class)
-public class AcsConfig {
+public class AliyunAcsConfig {
 
     /** 应用身份服务(IDaaS)配置 **/
     private final IdaasDoraemonProperties doraemonProperties;
 
-    public AcsConfig(IdaasDoraemonProperties doraemonProperties) {
+    public AliyunAcsConfig(IdaasDoraemonProperties doraemonProperties) {
         this.doraemonProperties = Objects.requireNonNull(doraemonProperties);
     }
 

@@ -150,59 +150,58 @@ redis:
   redisson:
     threads: 16
     nettyThreads: 32
+    # 连接池中,大于最小空闲连接数的连接多长时间回回收,单位毫秒.默认 10000
+    idleConnectionTimeout: 10000
+    # 连接到 Redis server 的超时时间 默认10000
+    connectTimeout: 10000
+    # redisServer 响应(执行)的超时时间.从命令完全发送开始算起,默认3000。我们有些大对象，而且定时任务容易集中执行。
+    timeout: 5000
+    # 尝试发送命令到服务器的次数,超过未发送成功则报错.成功则用 timeout 计时.默认3次
+    retryAttempts: 3
+    # 间隔多长时间后,另一条命令会尝试被执行,单位毫秒.默认1500,(应该是上次retry失败后)
+    retryInterval: 1500
+    # 订阅每节点最小空闲连接数,默认1
+    subscriptionConnectionMinimumIdleSize: 1
+    # 每个redis节点pub/sub最大连接池数量,默认50
+    subscriptionConnectionPoolSize: 50
+    # 每个 redis 连接订阅数量的限制.默认5
+    subscriptionsPerConnection: 5
+    database: 15
+    password: ins1234
+  single:
+    host: 192.168.56.89
+    port: 6379
   sentinel:
-    lowRel:
-      masterName: low_reliability_d1
+    masterName: low_reliability_d1
     # sentinel 服务器
-    ser1:
-      host: 192.168.56.89
-      port: 26379
-    ser2:
-      host: 192.168.56.90
-      port: 26379
-    ser3:
-      host: 192.168.56.124
-      port: 26379
-    default:
-      password: ins1234
-      database: 15
-      # xml配置为枚举,无法使用此处配置!!!读操作节点类型;有SLAVE/MASTER/MASTER_SLAVE,默认SLAVE
-      readMode: MASTER
-      # xml配置为枚举,无法使用此处配置!!!订阅操作节点类型:SLAVE/MASTER,默认SLAVE
-      subscriptionMode: MASTER
-      # 订阅每节点最小空闲连接数,默认1
-      subscriptionConnectionMinimumIdleSize: 1
-      # 每个redis节点pub/sub最大连接池数量,默认50
-      subscriptionConnectionPoolSize: 50
-      # 每个 redis 连接订阅数量的限制.默认5
-      subscriptionsPerConnection: 5
-      # 每个slave 节点最小空闲连接数,默认32
-      slaveConnectionMinimumIdleSize: 0
-      # 每个 slave 节点,最大连接池数量,默认64
-      slaveConnectionPoolSize: 0
-      # master 节点最小空闲连接数,默认32
-      masterConnectionMinimumIdleSize: 10
-      # master 节点最大连接池数量,默认64
-      masterConnectionPoolSize: 64
-      # redisServer 响应(执行)的超时时间.从命令完全发送开始算起,默认3000。我们有些大对象，而且定时任务容易集中执行。
-      timeout: 5000
-      # 连接到 Redis server 的超时时间 默认10000
-      connectTimeout: 10000
-      # 连接池中,大于最小空闲连接数的连接多长时间回回收,单位毫秒.默认 10000
-      idleConnectionTimeout: 10000
-      # 尝试发送命令到服务器的次数,超过未发送成功则报错.成功则用 timeout 计时.默认3次
-      retryAttempts: 3
-      # 间隔多长时间后,另一条命令会尝试被执行,单位毫秒.默认1500,(应该是上次retry失败后)
-      retryInterval: 1500
-      # 从第一次执行失败开始,连续多长时间内无法成功执行命令的节点被认为失败.单位毫秒.默认60000,
-      failedSlaveCheckInterval: 60000
-      # 间隔多长时间再尝试连接断开的服务器.单位毫秒.默认3000
-      failedSlaveReconnectionInterval: 3000
-      pingConnectionInterval: 60000
-      keepAlive: true
-      tcpNoDelay: true
-      # 多Redis服务器连接负载均衡模式,有WeightedRound/RoundRobin/Random,默认RoundRobin
-      loadBalancer: org.redisson.connection.balancer.RoundRobinLoadBalancer
+    servers:
+      - host: 192.168.56.89
+        port: 26379
+      - host: 192.168.56.90
+        port: 26379
+      - host: 192.168.56.124
+        port: 26379
+    # xml配置为枚举,无法使用此处配置!!!读操作节点类型;有SLAVE/MASTER/MASTER_SLAVE,默认SLAVE
+    readMode: MASTER
+    # xml配置为枚举,无法使用此处配置!!!订阅操作节点类型:SLAVE/MASTER,默认SLAVE
+    subscriptionMode: MASTER
+    # 每个slave 节点最小空闲连接数,默认32
+    slaveConnectionMinimumIdleSize: 0
+    # 每个 slave 节点,最大连接池数量,默认64
+    slaveConnectionPoolSize: 0
+    # master 节点最小空闲连接数,默认32
+    masterConnectionMinimumIdleSize: 10
+    # master 节点最大连接池数量,默认64
+    masterConnectionPoolSize: 64
+    # 从第一次执行失败开始,连续多长时间内无法成功执行命令的节点被认为失败.单位毫秒.默认60000,
+    failedSlaveCheckInterval: 60000
+    # 间隔多长时间再尝试连接断开的服务器.单位毫秒.默认3000
+    failedSlaveReconnectionInterval: 3000
+    pingConnectionInterval: 60000
+    keepAlive: true
+    tcpNoDelay: true
+    # 多Redis服务器连接负载均衡模式,有WeightedRound/RoundRobin/Random,默认RoundRobin
+    loadBalancer: org.redisson.connection.balancer.RoundRobinLoadBalancer
 
 # jetcache配置
 jetcache:
