@@ -30,7 +30,7 @@ public class SentinelProperties {
     private int pingConnectionInterval;
     private boolean keepAlive;
     private boolean tcpNoDelay;
-    private LoadBalancer loadBalancer;
+    private String loadBalancer;
 
     public String getMasterName() {
         return masterName;
@@ -136,11 +136,11 @@ public class SentinelProperties {
         this.tcpNoDelay = tcpNoDelay;
     }
 
-    public LoadBalancer getLoadBalancer() {
+    public String getLoadBalancer() {
         return loadBalancer;
     }
 
-    public void setLoadBalancer(LoadBalancer loadBalancer) {
+    public void setLoadBalancer(String loadBalancer) {
         this.loadBalancer = loadBalancer;
     }
 
