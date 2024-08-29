@@ -24,8 +24,6 @@
         <mybatis-starter.version>2.0.0</mybatis-starter.version>
         <mybatis-generator.version>1.3.7</mybatis-generator.version>
         <mybatis-dymic-sql.version>1.1.0</mybatis-dymic-sql.version>
-        <redisson.version>3.12.0</redisson.version>
-        <fst.version>2.57</fst.version>
         <spring-boot-orika-starter.version>1.9.0</spring-boot-orika-starter.version>
         <spring-boot-velocity-starter.version>1.0.4.RELEASE</spring-boot-velocity-starter.version>
         <spring-boot-dubbo-starter.version>2.0.0</spring-boot-dubbo-starter.version>
@@ -153,18 +151,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- redisson -->
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>${redisson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.ruedigermoeller</groupId>
-            <artifactId>fst</artifactId>
-            <version>${fst.version}</version>
-        </dependency>
-
         <!-- jetcache -->
         <dependency>
             <groupId>com.alicp.jetcache</groupId>
@@ -186,6 +172,10 @@
                 <exclusion>
                     <groupId>com.google.errorprone</groupId>
                     <artifactId>error_prone_annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.ow2.asm</groupId>
+                    <artifactId>asm</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -303,6 +293,12 @@
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
             <version>4.7.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
