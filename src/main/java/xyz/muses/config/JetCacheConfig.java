@@ -7,9 +7,9 @@ package xyz.muses.config;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,11 +26,13 @@ import com.alicp.jetcache.support.FastjsonKeyConvertor;
 import com.alicp.jetcache.support.KryoValueDecoder;
 import com.alicp.jetcache.support.KryoValueEncoder;
 
-import xyz.muses.constants.RedisConstant;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisSentinelPool;
 import redis.clients.util.Pool;
+import xyz.muses.config.redis.RedissonProperties;
+import xyz.muses.config.redis.SentinelProperties;
+import xyz.muses.constants.RedisConstant;
 
 /**
  * @author jervis
@@ -39,32 +41,16 @@ import redis.clients.util.Pool;
 @Configuration
 @EnableCreateCacheAnnotation
 @EnableMethodCache(basePackages = "cn.muses")
+@EnableConfigurationProperties({SentinelProperties.class, RedissonProperties.class})
 public class JetCacheConfig {
-    @Value("${redis.sentinel.ser1.host}")
-    private String ser1Host;
-    @Value("${redis.sentinel.ser2.host}")
-    private String ser2Host;
-    @Value("${redis.sentinel.ser3.host}")
-    private String ser3Host;
-    @Value("${redis.sentinel.ser1.port}")
-    private String ser1Port;
-    @Value("${redis.sentinel.ser2.port}")
-    private String ser2Port;
-    @Value("${redis.sentinel.ser3.port}")
-    private String ser3Port;
-    @Value("${redis.sentinel.lowRel.masterName}")
-    private String lowRelMasterName;
-    @Value("${redis.sentinel.default.password}")
-    private String password;
 
     @Bean
-    public Pool<Jedis> pool() {
-        Set<String> sentinels = new HashSet<>();
-        sentinels.add(ser1Host + ":" + ser1Port);
-        sentinels.add(ser2Host + ":" + ser2Port);
-        sentinels.add(ser3Host + ":" + ser3Port);
-        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        return new JedisSentinelPool(lowRelMasterName, sentinels, jedisPoolConfig, password);
+    public Pool<Jedis> pool(SentinelProperties sentinelProp, RedissonProperties redissonProp) {
+        return new JedisSentinelPool(
+            sentinelProp.getMasterName(), new HashSet<>(sentinelProp.getServers().stream()
+                .map(s -> s.getHost() + ":" + s.getPort()).collect(Collectors.toList())),
+            new JedisPoolConfig(), redissonProp.getConnectTimeout(), redissonProp.getPassword(),
+            redissonProp.getDatabase());
     }
 
     @Bean
