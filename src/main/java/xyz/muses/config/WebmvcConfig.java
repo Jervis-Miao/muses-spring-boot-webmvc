@@ -67,6 +67,7 @@ public class WebmvcConfig {
      * @return
      */
     @Bean
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public WebMvcConfigurer webMvcConfigurer(RedissonClient redisson, JwtUserUtils jwtUserUtils,
         ObjectMapper objectMapper,
         List<IApiInterceptorProcessor> processors) {

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,11 +28,13 @@ import com.alicp.jetcache.support.KryoValueDecoder;
 import com.alicp.jetcache.support.KryoValueEncoder;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisSentinelPool;
 import redis.clients.util.Pool;
 import xyz.muses.config.redis.RedissonProperties;
 import xyz.muses.config.redis.SentinelProperties;
+import xyz.muses.config.redis.SingleProperties;
 import xyz.muses.constants.RedisConstant;
 
 /**
@@ -41,11 +44,12 @@ import xyz.muses.constants.RedisConstant;
 @Configuration
 @EnableCreateCacheAnnotation
 @EnableMethodCache(basePackages = "cn.muses")
-@EnableConfigurationProperties({SentinelProperties.class, RedissonProperties.class})
+@EnableConfigurationProperties({SentinelProperties.class, SingleProperties.class, RedissonProperties.class})
 public class JetCacheConfig {
 
     @Bean
-    public Pool<Jedis> pool(SentinelProperties sentinelProp, RedissonProperties redissonProp) {
+    @ConditionalOnBean(name = "sentinelRedissonClient")
+    public Pool<Jedis> sentinelPool(SentinelProperties sentinelProp, RedissonProperties redissonProp) {
         return new JedisSentinelPool(
             sentinelProp.getMasterName(), new HashSet<>(sentinelProp.getServers().stream()
                 .map(s -> s.getHost() + ":" + s.getPort()).collect(Collectors.toList())),
@@ -54,11 +58,19 @@ public class JetCacheConfig {
     }
 
     @Bean
+    @ConditionalOnBean(name = "singleRedissonClient")
+    public Pool<Jedis> singlePool(SingleProperties singleProp, RedissonProperties redissonProp) {
+        return new JedisPool(new JedisPoolConfig(), singleProp.getHost(), singleProp.getPort(),
+            redissonProp.getConnectTimeout(), redissonProp.getPassword(), redissonProp.getDatabase());
+    }
+
+    @Bean
     public SpringConfigProvider springConfigProvider() {
         return new SpringConfigProvider();
     }
 
     @Bean
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     public GlobalCacheConfig config(SpringConfigProvider configProvider, Pool<Jedis> pool) {
         Map<String, CacheBuilder> localBuilders = new HashMap<>(1);
         // 本地缓存配置

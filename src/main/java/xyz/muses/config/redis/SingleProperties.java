@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SingleProperties {
 
     private String host;
-    private String port;
+    private Integer port;
 
     public String getHost() {
         return host;
@@ -23,11 +23,11 @@ public class SingleProperties {
         this.host = host;
     }
 
-    public String getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 }
