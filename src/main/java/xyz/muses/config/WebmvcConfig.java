@@ -78,8 +78,11 @@ public class WebmvcConfig {
                     .addPathPatterns(MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
                 // JWT用户上下文拦截器
                 registry.addInterceptor(new JwtInterceptor(redisson, jwtUserUtils))
-                    .excludePathPatterns(MvcConstant.AUTH_URL_PREFIX + "/**", MvcConstant.LOGIN_IN_URL,
-                        MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
+                    .excludePathPatterns("/")
+                    .excludePathPatterns("/index.html", "/favicon.ico", "/403.html")
+                    .excludePathPatterns("/swagger/**", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs")
+                    .excludePathPatterns(MvcConstant.LOGIN_IN_URL, MvcConstant.AUTH_URL_PREFIX + "/**")
+                    .excludePathPatterns(MvcConstant.EXTERNAL_API_URL_PREFIX + "/**");
             }
 
             @Override
