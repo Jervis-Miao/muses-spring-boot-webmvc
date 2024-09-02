@@ -1,5 +1,8 @@
 package xyz.muses.web.controller.user;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +22,7 @@ import xyz.muses.web.service.user.AuthService;
  */
 @RestController
 @RequestMapping(MvcConstant.AUTH_URL_PREFIX)
+@Api(value = "用户认证接口", tags = {"用户管理"})
 public class AuthController extends BaseController {
 
     @Autowired
@@ -34,7 +38,9 @@ public class AuthController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/sendSmsCode")
-    public BaseResponseDTO<Object> sendSmsCode(String id, @RequestParam String phoneNumber) throws Exception {
+    @ApiOperation(value = "发送短信验证码", notes = "发送登录短信验证码")
+    public BaseResponseDTO<Object> sendSmsCode(@ApiParam(value = "请求ID", required = true) String id,
+        @ApiParam(value = "请求手机号", required = true) @RequestParam String phoneNumber) throws Exception {
         return this.returnWithSuccess(authService.sendSmsCode(id, phoneNumber));
     }
 
