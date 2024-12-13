@@ -15,6 +15,7 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import xyz.muses.framework.orm.mybatis.MyBatisRepository;
 import xyz.muses.framework.orm.mybatis.easylist.paginator.OffsetLimitInterceptor;
 
 /**
@@ -22,7 +23,7 @@ import xyz.muses.framework.orm.mybatis.easylist.paginator.OffsetLimitInterceptor
  * @date 2023/12/19.
  */
 @Configuration
-// @MapperScan("xyz.muses.config.repository.g.mapper")
+@MapperScan(basePackages = "xyz.muses.config.repository", annotationClass = MyBatisRepository.class)
 public class MybatisConfig {
 
     @Bean

@@ -3,8 +3,9 @@
 
     <contextName>muses</contextName>
 
-    <define name="log.path" class="xyz.muses.config.logback.LogPathPropertyDefiner"/>
-    <define name="log.isRolling" class="xyz.muses.config.logback.LogRollingPropertyDefiner"/>
+    <!-- 引用 Spring Boot 配置的日志文件路径 -->
+    <springProperty scope="context" name="log.path" source="logging.file.path" defaultValue="/Volumes/workspace/logs/webmvc"/>
+    <springProperty scope="context" name="log.isRolling" source="logging.isRolling" defaultValue="true"/>
 
     <appender name="ALIBABA-APPENDER" class="ch.qos.logback.core.FileAppender">
         <file>${log.path}/muses.alibaba.log</file>

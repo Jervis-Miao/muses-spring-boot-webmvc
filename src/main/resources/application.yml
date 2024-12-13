@@ -1,6 +1,21 @@
+# 应用配置
+app:
+  name: fins-app-server
+  env: DEV
+  com-sms-code: 123456
+
 # 日志配置
 logging:
+  file:
+    path: "/Volumes/workspace/logs/fins"
+  isRolling: true
   config: classpath:logback-spring.xml
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
 
 # tomcat 配置
 server:
