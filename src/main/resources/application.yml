@@ -29,7 +29,7 @@ server:
       registered: false
   tomcat:
     # tomcat基目录。如果未指定，则使用临时目录（linux服务器会将10天未使用的临时目录清除，届时文件导入功能将会异常）
-    basedir: /home/muses/tomcat/
+    basedir: /Volumes/workspace/logs/tomcat/
     # 请求体大小限制，-1为不限
     max-http-post-size: -1
     # connector请求连接超时时长
@@ -49,7 +49,7 @@ server:
       file-date-format: .yyyy-MM-dd
       suffix: .log
       buffered: true
-      directory: /home/muses/tomcat/access/
+      directory: /Volumes/workspace/logs/tomcat/access/
       rename-on-rotate: false
       request-attributes-enabled: false
       rotate: true
