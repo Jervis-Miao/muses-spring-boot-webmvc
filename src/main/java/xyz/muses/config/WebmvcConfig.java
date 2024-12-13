@@ -19,6 +19,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -47,13 +48,35 @@ import xyz.muses.web.model.dto.BaseResponseDTO;
 public class WebmvcConfig {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    /**
+     * 请求日志过滤器
+     *
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean<CommonsRequestLoggingFilter> loggingFilter() {
+        FilterRegistrationBean<CommonsRequestLoggingFilter> registrationBean = new FilterRegistrationBean<>();
+        CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+        filter.setIncludeClientInfo(true);
+        filter.setIncludeQueryString(true);
+        filter.setIncludePayload(true);
+        filter.setMaxPayloadLength(10000);
+        filter.setIncludeHeaders(false);
+        filter.setAfterMessagePrefix("REQUEST DATA: ");
+        registrationBean.setFilter(filter);
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setName("loggingFilter");
+        registrationBean.setOrder(1);
+        return registrationBean;
+    }
+
     @Bean
     public FilterRegistrationBean requestWrapperFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new RequestWrapperFilter());
         registration.addUrlPatterns(MvcConstant.EXTERNAL_API_URL_PREFIX + "/*");
         registration.setName("requestWrapperFilter");
-        registration.setOrder(1);
+        registration.setOrder(2);
         return registration;
     }
 
