@@ -35,7 +35,7 @@ import redis.clients.util.Pool;
 import xyz.muses.config.redis.RedissonProperties;
 import xyz.muses.config.redis.SentinelProperties;
 import xyz.muses.config.redis.SingleProperties;
-import xyz.muses.constants.RedisConstant;
+import xyz.muses.framework.cache.constant.RedisConst;
 
 /**
  * @author jervis
@@ -87,7 +87,7 @@ public class JetCacheConfig {
                 .valueEncoder(KryoValueEncoder.INSTANCE).valueDecoder(KryoValueDecoder.INSTANCE).jedisPool(pool);
         remoteCacheBuilder.setCacheNullValue(true);
         remoteCacheBuilder.setExpireAfterWriteInMillis(4 * 60 * 60 * 1000);
-        remoteCacheBuilder.setKeyPrefix(RedisConstant.MUSES_REDIS_PRE_KEY);
+        remoteCacheBuilder.setKeyPrefix(RedisConst.SYSTEM_REDIS_PRE_KEY);
         remoteBuilders.put(CacheConsts.DEFAULT_AREA, remoteCacheBuilder);
         // 全局配置
         GlobalCacheConfig globalCacheConfig = new GlobalCacheConfig();

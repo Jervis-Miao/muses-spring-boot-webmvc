@@ -17,7 +17,13 @@ public interface ThreadPoolConstant {
          * 默认线程池
          */
         DEFAULT_TASK_EXECUTOR(AnnotationAsyncExecutionInterceptor.DEFAULT_TASK_EXECUTOR_BEAN_NAME, "Async.Thread-",
-            "Async");
+            "Async"),
+
+        // 缓存刷新线程池
+        REFRESH_CACHE_EXECUTOR("refreshCacheExecutor", "RefreshCache.Thread-", "RefreshCache"),
+
+        // 定时任务线程池
+        SCHEDULED_TASK_EXECUTOR("scheduledTaskExecutor", "ScheduledTask.Thread-", "ScheduledTask");
 
         /**
          * BeanName

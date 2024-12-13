@@ -12,7 +12,7 @@ import xyz.muses.constants.ResultErrorConstant.Error;
  * @author jervis
  * @date 2020/12/1.
  */
-public class MusesException extends Exception {
+public class MusesException extends RuntimeException {
     private static final long serialVersionUID = -357641166647154098L;
 
     private Error error;

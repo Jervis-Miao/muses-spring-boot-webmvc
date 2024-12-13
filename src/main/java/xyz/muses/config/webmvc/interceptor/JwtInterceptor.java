@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RedissonClient;
 
-import xyz.muses.constants.CacheConstant;
+import xyz.muses.constants.redis.cache.RedisCacheConst;
 import xyz.muses.utils.JwtUserUtils;
 import xyz.muses.web.model.dto.BaseResponseDTO;
 
@@ -43,8 +43,9 @@ public class JwtInterceptor extends AbstractInterceptor {
             this.writeError(response, BaseResponseDTO.DEFAULT_RESPONSE_RESULT.PARAM_CHECK_FAIL,
                 "Access Authorization missing, please check!");
             return false;
-        } else if (null == (jwtUser = jwtUserUtils.verify(jwt.substring(7), JwtLocalUser.class)) || null == (ctxJwtUser =
-            (JwtLocalUser)this.redisson.getBucket(CacheConstant.Key.JWT.getValue() + jwtUser.getUserId()).get())) {
+        } else if (null == (jwtUser = jwtUserUtils.verify(jwt.substring(7), JwtLocalUser.class))
+            || null == (ctxJwtUser =
+                (JwtLocalUser)this.redisson.getBucket(RedisCacheConst.Key.JWT.getCode() + jwtUser.getUserId()).get())) {
             this.writeError(response, BaseResponseDTO.DEFAULT_RESPONSE_RESULT.PARAM_CHECK_FAIL,
                 "The Authorization is invalid or expired, please apply again!");
             return false;

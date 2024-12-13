@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 import xyz.muses.config.webmvc.interceptor.JwtLocalUser;
 import xyz.muses.config.webmvc.interceptor.JwtUserContext;
-import xyz.muses.constants.CacheConstant;
 import xyz.muses.constants.ResultErrorConstant;
+import xyz.muses.constants.redis.cache.RedisCacheConst;
 import xyz.muses.exceptions.MusesException;
 import xyz.muses.utils.JwtUserUtils;
 import xyz.muses.web.service.BaseService;
@@ -90,7 +90,7 @@ public class LoginService extends BaseService {
     }
 
     private void setUserCache(JwtLocalUser user, long ttl) {
-        RBucket<Object> bucket = redisson.getBucket(CacheConstant.Key.JWT.getValue() + user.getUserId());
+        RBucket<Object> bucket = redisson.getBucket(RedisCacheConst.Key.JWT.getCode() + user.getUserId());
         bucket.set(user);
         bucket.expire(ttl, TimeUnit.MILLISECONDS);
     }
