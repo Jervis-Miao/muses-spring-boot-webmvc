@@ -12,9 +12,9 @@
             type="xyz.muses.framework.orm.generator.plugins.CustomizeDaoSupportPlugin">
             <property name="mapperAnnotation" value="xyz.muses.framework.orm.mybatis.MyBatisRepository"/>
             <property name="daoSuffix" value="DAO"/>
-            <property name="targetProject" value="${java.path}"/>
+            <property name="targetProject" value="${project.path}/java"/>
             <property name="targetPackage" value="${java.package.base}.repository.dao"/>
-            <property name="xmlTargetProject" value="${resources.path}"/>
+            <property name="xmlTargetProject" value="${project.path}/resources"/>
             <property name="xmlTargetPackage" value="mybatis/xml/dao"/>
         </plugin>
 
